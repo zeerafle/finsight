@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@azure/ai-form-recognizer": "^5.0.0",
+    "@azure/identity": "^4.2.0",
     "vue": "^3.4.21",
     "vue-router": "^4.3.2"
   },
@@ -25,6 +26,7 @@
     "postcss": "^8.4.38",
     "prettier": "3.2.5",
     "tailwindcss": "^3.4.3",
-    "vite": "^5.2.8"
+    "vite": "^5.2.8",
+    "wrangler": "^3.57.1"
   }
 }

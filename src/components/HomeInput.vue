@@ -18,7 +18,18 @@ const handleFilesInput = (event) => {
 };
 
 async function analyzeFiles() {
-  console.log('Analyzing files...');
+  const formData = new FormData();
+  Array.from(selectedFiles.value).forEach((file) => {
+    formData.append('files', file);
+  });
+
+  const response = await fetch('api/analyze', {
+    method: 'POST',
+    body: formData,
+  });
+
+  const data = await response.json();
+  console.log(data);
 }
 </script>
 
