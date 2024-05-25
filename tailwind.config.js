@@ -30,7 +30,8 @@ export default {
           "warning": "#A5DD9B",
           "error": "#D37676",
         }
-      }
+      },
+      'dark'
     ]
   }
 }
