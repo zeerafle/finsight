@@ -23,11 +23,15 @@ watch(() => prop.data, (value) => {
     const transactionDateObject = result.result.documents[0].fields.TransactionDate;
     const transactionTimeObject = result.result.documents[0].fields.TransactionTime;
 
-    transactionDate = transactionDateObject.value
-      ? dayjs(`${transactionDateObject.value.split('T')[0]} ${transactionTimeObject.value || ''}`, 'YYYY-MM-DD HH:mm:ss')
-      : dayjs(transactionDateObject.content, ['DD MMMM YYYY', 'DD MM YYYY'], 'id')
+    if (transactionDateObject) {
+      transactionDate = transactionDateObject.value
+        ? dayjs(`${transactionDateObject.value.split('T')[0]} ${transactionTimeObject.value || ''}`, 'YYYY-MM-DD HH:mm:ss')
+        : dayjs(transactionDateObject.content, ['DD MMMM YYYY', 'DD MM YYYY'], 'id')
 
-    if (!transactionDate.isValid()) {
+      if (!transactionDate.isValid()) {
+        transactionDate = ''
+      }
+    } else {
       transactionDate = ''
     }
 
