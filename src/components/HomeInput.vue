@@ -43,12 +43,14 @@ async function analyzeFiles() {
 </script>
 
 <template>
+  <div class="flex flex-col items-center space-y-4">
   <input accept=".jpeg,.jpg,.png,.bmp,.tiff,.heif,.pdf" class="file-input file-input-bordered file-input-md w-full max-w-xs"
          multiple type="file" @change="handleFilesInput"/>
   <button class="btn btn-primary" @click="analyzeFiles">
-    <span v-if="!isLoading">Analyze</span>
+    <span v-if="!isLoading">Ekstrak</span>
     <span v-else class="loading loading-dots loading-md"></span>
   </button>
+  </div>
 </template>
 
 <style scoped>

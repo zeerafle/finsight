@@ -47,7 +47,7 @@ watch(() => prop.data, (value) => {
 <template>
 <div>
   <div v-show="prop.data" class="overflow-x-auto">
-    <table class="table table-zebra">
+    <table class="table">
       <thead>
         <tr>
           <th>Tanggal</th>
@@ -56,11 +56,15 @@ watch(() => prop.data, (value) => {
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in analysisResults" :key="item.filename">
+        <tr v-for="item in analysisResults" :key="item.filename" class="hover">
           <td>{{ item.transactionDate ? item.transactionDate.format('L LT') : '' }}</td>
           <td>{{ item.merchant }}</td>
           <td>Rp{{ formatNumber(item.total) }}</td>
         </tr>
+      <tr class="font-bold">
+        <td class="text-center" colspan="2">Total</td>
+        <td>Rp{{ formatNumber(analysisResults.reduce((acc, item) => acc + item.total, 0)) }}</td>
+      </tr>
       </tbody>
     </table>
   </div>

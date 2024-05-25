@@ -36,7 +36,12 @@ const exportExcel = () => {
 
 <template>
   <div>
-  <button @click="exportCsv()">Export to CSV</button>
-  <button @click="exportExcel()">Export to Excel</button>
+    <div class="dropdown">
+      <div class="btn m-1" role="button" tabindex="0">Ekspor ke</div>
+      <ul class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52" tabindex="0">
+        <li><a @click.prevent="exportCsv">CSV</a></li>
+        <li><a @click.prevent="exportExcel">Excel</a></li>
+      </ul>
+    </div>
   </div>
 </template>

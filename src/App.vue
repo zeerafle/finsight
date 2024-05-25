@@ -1,15 +1,10 @@
 <script setup>
-import { RouterLink, RouterView } from "vue-router";
+import { RouterView } from "vue-router";
+import BaseNavbar from "@/components/BaseNavbar.vue";
 </script>
 
 <template>
-  <nav class="navbar bg-neutral">
-    <div class="navbar-center">
-      <RouterLink to="/" >
-      <div class="text-4xl">Finsight</div>
-      </RouterLink>
-    </div>
-  </nav>
+  <BaseNavbar />
   <RouterView />
 </template>
 
