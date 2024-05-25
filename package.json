@@ -11,6 +11,7 @@
   "dependencies": {
     "@azure/ai-form-recognizer": "^5.0.0",
     "@azure/identity": "^4.2.0",
+    "dayjs": "^1.11.11",
     "vue": "^3.4.21",
     "vue-router": "^4.3.2"
   },

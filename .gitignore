@@ -32,3 +32,4 @@ coverage
 .env
 .dev.vars
 .wrangler
+/sample.json

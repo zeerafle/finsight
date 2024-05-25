@@ -5,7 +5,7 @@ export const onRequestOptions = async () => {
         headers: {
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Headers': '*',
-            'Access-Control-Allow-Methods': 'GET',
+            'Access-Control-Allow-Methods': 'POST',
             'Access-Control-Max-Age': '86400',
         },
     });
