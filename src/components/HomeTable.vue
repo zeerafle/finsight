@@ -9,6 +9,7 @@ dayjs.extend(LocalizedFormat)
 dayjs.extend(customParseFormat)
 
 const prop = defineProps(['data'])
+const emit = defineEmits(['analysisResultsUpdated'])
 const analysisResults = ref([])
 
 const formatNumber = (num) => {
@@ -19,13 +20,12 @@ watch(() => prop.data, (value) => {
   // map each value.analysisResults to analysisResults
   analysisResults.value = value?.analysisResults.map((result) => {
     let transactionDate
-    const transactionDateValue = result.result.documents[0].fields.TransactionDate.value;
-    const transactionTimeValue = result.result.documents[0].fields.TransactionTime.value;
-    const transactionDateContent = result.result.documents[0].fields.TransactionDate.content;
+    const transactionDateObject = result.result.documents[0].fields.TransactionDate;
+    const transactionTimeObject = result.result.documents[0].fields.TransactionTime;
 
-    transactionDate = transactionDateValue
-      ? dayjs(`${transactionDateValue.split('T')[0]} ${transactionTimeValue || ''}`, 'YYYY-MM-DD HH:mm:ss')
-      : dayjs(transactionDateContent, ['DD MMMM YYYY', 'DD MM YYYY'], 'id')
+    transactionDate = transactionDateObject.value
+      ? dayjs(`${transactionDateObject.value.split('T')[0]} ${transactionTimeObject.value || ''}`, 'YYYY-MM-DD HH:mm:ss')
+      : dayjs(transactionDateObject.content, ['DD MMMM YYYY', 'DD MM YYYY'], 'id')
 
     if (!transactionDate.isValid()) {
       transactionDate = ''
@@ -34,11 +34,14 @@ watch(() => prop.data, (value) => {
     return {
       filename: result.filename,
       transactionDate: transactionDate,
-      merchant: result.result.documents[0].fields.MerchantName.value || '',
+      merchant: result.result.documents[0].fields.MerchantName ? result.result.documents[0].fields.MerchantName.value : 'Merchant Name Not Found',
       total: result.result.documents[0].fields.Total.value
     }
   })
+
+  emit('analysisResultsUpdated', analysisResults.value)
 })
+
 </script>
 
 <template>
@@ -54,7 +57,7 @@ watch(() => prop.data, (value) => {
       </thead>
       <tbody>
         <tr v-for="item in analysisResults" :key="item.filename">
-          <td>{{ item.transactionDate }}</td>
+          <td>{{ item.transactionDate ? item.transactionDate.format('L LT') : '' }}</td>
           <td>{{ item.merchant }}</td>
           <td>Rp{{ formatNumber(item.total) }}</td>
         </tr>
@@ -63,7 +66,3 @@ watch(() => prop.data, (value) => {
   </div>
 </div>
 </template>
-
-<style scoped>
-
-</style>
